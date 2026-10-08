@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | Frosted Frameworks LLC</title>
   <meta name="description" content="Start a project with Frosted Frameworks.">
+  <link rel="canonical" href="https://frostedframeworks.com/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Frosted Frameworks LLC">
+  <meta property="og:title" content="Contact | Frosted Frameworks LLC">
+  <meta property="og:description" content="Start a project with Frosted Frameworks.">
+  <meta property="og:url" content="https://frostedframeworks.com/contact.html">
+  <meta property="og:image" content="https://frostedframeworks.com/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Frosted Frameworks LLC: fresh-baked games, prototypes, and 3D work, next to a three-tier cake topped with a cinnamon roll.">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="images/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,8 +51,8 @@
 
 <section class="section" style="padding-top:1.5rem">
   <div class="wrap contact-grid">
-    <!-- EDIT: Replace YOUR_FORM_ID with your Formspree form ID (see README.md). -->
-    <form class="ticket" id="order-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-email="eralynart@gmail.com">
+    <!-- Submissions go to Formspree (form mkjorzdd), which emails them to you. -->
+    <form class="ticket" id="order-form" action="https://formspree.io/f/mkjorzdd" method="POST" data-email="eralynart@gmail.com">
       <div class="ticket-head">
         <h2>Project request</h2>
       </div>
@@ -86,6 +97,7 @@
         <textarea id="message" name="message" required aria-describedby="message-hint"></textarea>
         <p class="hint" id="message-hint">What are you making, who is it for, and where are you stuck?</p>
       </div>
+      <input type="hidden" name="_subject" value="New project request from Frosted Frameworks">
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
       <button class="btn btn-primary" type="submit">Send request</button>
       <p class="form-status" role="status" aria-live="polite"></p>

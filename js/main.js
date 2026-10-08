@@ -16,6 +16,11 @@
     el.textContent = new Date().getFullYear();
   });
 
+  // 404 page: show the address the visitor tried
+  document.querySelectorAll('[data-path]').forEach((el) => {
+    el.textContent = window.location.pathname;
+  });
+
   // Contact form: send to Formspree without leaving the page
   const form = document.getElementById('order-form');
   if (!form) return;
