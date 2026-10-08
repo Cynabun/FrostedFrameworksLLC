@@ -308,19 +308,31 @@ img { max-width: 100%; display: block; }
 .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* Credits: a game-style roll of past projects */
-.credits { list-style: none; margin: 2rem 0 0; padding: 0; max-width: 900px; border-top: 3px solid var(--ink); }
+.credits { list-style: none; margin: 2rem 0 0; padding: 0; max-width: 1000px; border-top: 3px solid var(--ink); }
 .credits li {
-  display: grid; grid-template-columns: minmax(0, 17rem) 1fr; gap: 0.35rem 2rem;
+  display: grid; grid-template-columns: minmax(0, 15rem) 1fr 160px; gap: 0.6rem 2rem;
+  grid-template-areas: "title text thumb"; align-items: center;
   padding-block: 1.15rem; border-bottom: 2px dashed rgba(59, 33, 22, 0.3);
 }
-.credits h3 { margin: 0; font-size: 1.3rem; }
+.credits h3 { grid-area: title; margin: 0; font-size: 1.3rem; }
 .credits cite { font-style: normal; }
+.credits p { grid-area: text; margin: 0; color: var(--ink-soft); }
+.credit-thumb-link {
+  grid-area: thumb; display: block; border-radius: 10px;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.credit-thumb-link:hover { transform: translateY(-3px); box-shadow: 0 5px 0 var(--cinnamon); }
+.credit-thumb {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+  border: 2.5px solid var(--ink); border-radius: 10px; background: var(--bun);
+}
+/* Small status tags under a project title (About credits and Works cards) */
+.credit-notes { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
 .credit-note {
-  display: block; width: fit-content; margin-top: 0.4rem;
   font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0;
   padding: 0.1rem 0.5rem; background: var(--butter); border: 2px solid var(--ink); border-radius: 6px;
 }
-.credits p { margin: 0; color: var(--ink-soft); }
+.credit-note.demo { background: var(--cinnamon); color: var(--glaze); }
 
 .recipe-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .recipe {
@@ -361,7 +373,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Works: display case ---------- */
 
 .shelf { margin-top: clamp(2.5rem, 5vw, 3.75rem); }
-.shelf h2 { margin-bottom: 0.3rem; }
+.shelf h3 { font-size: clamp(1.4rem, 2.6vw, 1.75rem); margin-bottom: 0.3rem; }
 .shelf > p { color: var(--ink-soft); }
 
 .case {
@@ -393,29 +405,56 @@ img { max-width: 100%; display: block; }
 .tint-caramel  { --tint: rgba(233, 162, 59, 0.24); }
 .tint-cinnamon { --tint: rgba(156, 85, 48, 0.16); }
 
-.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.75rem; margin-top: 2rem; }
+.projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; margin-top: 2rem; }
 .project {
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--glaze); border: 3px solid var(--ink); border-radius: 20px;
 }
-.project-art {
-  aspect-ratio: 16 / 10; display: grid; place-items: center;
-  border-bottom: 3px solid var(--ink);
-  font-family: var(--mono); font-weight: 600; font-size: clamp(1.6rem, 3vw, 2.2rem);
-  background-color: var(--tint);
-  background-image:
-    linear-gradient(rgba(59, 33, 22, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 33, 22, 0.08) 1px, transparent 1px);
-  background-size: 20px 20px;
+.project-img {
+  display: block; width: 100%; height: auto; min-height: 0; aspect-ratio: 16 / 9; object-fit: cover;
+  background: var(--bun); border-bottom: 3px solid var(--ink);
 }
+/* Featured projects span the full row, image beside the text ("flip" puts the image on the right) */
+.project.featured {
+  grid-column: 1 / -1; display: grid; grid-template-columns: 1.1fr 1fr;
+  box-shadow: 8px 8px 0 var(--caramel);
+}
+.project.featured .project-img { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 3px solid var(--ink); }
+.project.featured.flip { grid-template-columns: 1fr 1.1fr; }
+.project.featured.flip .project-img { order: 2; border-right: 0; border-left: 3px solid var(--ink); }
 .project-body { display: flex; flex-direction: column; flex: 1; padding: 1.3rem 1.4rem 1.5rem; }
 .project-body h3 { margin-bottom: 0.4rem; }
+.tools { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.2rem; padding: 0; }
+.tools li {
+  font-family: var(--mono); font-size: 0.8rem; font-weight: 600;
+  padding: 0.15rem 0.6rem; background: var(--dough); border: 2px solid var(--ink); border-radius: 999px;
+}
 .project-meta { margin: 0 0 0.8rem; font-size: 0.98rem; color: var(--ink-soft); }
 .project-meta dt { display: inline; font-weight: 600; color: var(--ink); }
 .project-meta dd { display: inline; margin: 0; }
 .project-meta dd::after { content: ""; display: block; }
 .project-body p { font-size: 1.02rem; }
-.project-body a { margin-top: auto; font-weight: 600; }
+.project-link { margin-top: auto; align-self: flex-start; font-weight: 600; }
+.project-links { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
+.project-links .project-link { margin-top: 0; }
+.btn-small { padding: 0.55rem 1.1rem; font-size: 0.95rem; box-shadow: 0 3px 0 var(--ink); }
+.btn-butter { background: var(--butter); }
+.btn-butter:hover { background: #FFE6A8; }
+
+@media (max-width: 760px) {
+  .credits li { grid-template-columns: 1fr 120px; grid-template-areas: "title thumb" "text text"; }
+}
+
+@media (max-width: 1000px) {
+  .projects { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .project.featured, .project.featured.flip { grid-template-columns: 1fr; }
+  .project.featured .project-img, .project.featured.flip .project-img {
+    order: 0; height: auto; aspect-ratio: 16 / 9; object-position: center;
+    border-right: 0; border-left: 0; border-bottom: 3px solid var(--ink);
+  }
+}
 
 /* ---------- Contact: order ticket ---------- */
 
@@ -481,7 +520,6 @@ input:focus, select:focus, textarea:focus { background: var(--glaze); }
 }
 @media (max-width: 560px) {
   .field-row { grid-template-columns: 1fr; }
-  .credits li { grid-template-columns: 1fr; }
   body { font-size: 1.0625rem; }
 }
 

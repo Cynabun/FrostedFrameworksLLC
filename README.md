@@ -9,9 +9,14 @@ The static site for https://frostedframeworks.com, hosted on GitHub Pages.
 - `images/social-card.png` (1200×630) is the preview image shown when the site is shared.
 - `CNAME` holds the custom domain. Don't delete it, or GitHub Pages will drop the domain.
 
+## Adding a project to the Works page
+
+Copy an `<article class="project">` block in `works.html`. Put the image in `images/works/`:
+16:9, about 1200px wide, saved as WebP keeps the page fast. The full-size originals
+(`images/Promo*`) aren't used by the site.
+
 ## Still to do
 
-- `works.html`: real project cards (search for `[` and `EDIT:`), and specific tools on the skill shelves.
 - `about.html`: optionally replace the "FF" circle with a photo (instructions in the comment).
 
 ## Contact form
