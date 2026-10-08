@@ -98,7 +98,7 @@ img { max-width: 100%; display: block; }
   text-decoration: none; color: var(--glaze);
   font-family: var(--display); font-weight: 700; font-size: 1.4rem;
 }
-.brand svg { width: 46px; height: 46px; flex: none; }
+.brand .logo { width: 46px; height: 46px; flex: none; }
 
 .site-nav ul { list-style: none; display: flex; gap: 0.25rem; margin: 0; padding: 0; }
 .site-nav a {
@@ -125,7 +125,10 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 760px) {
-  .header-inner { flex-wrap: wrap; }
+  /* Brand takes the leftover space; the menu opens on its own row below */
+  .header-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0.75rem; }
+  .site-nav { grid-column: 1 / -1; }
+  .brand span { line-height: 1.1; }
   .js .nav-toggle { display: inline-block; }
   .js .site-nav { display: none; width: 100%; }
   .js .site-nav.open { display: block; }
@@ -180,8 +183,9 @@ img { max-width: 100%; display: block; }
   display: flex; flex-direction: column; align-items: center;
   width: min(430px, 94%); margin-inline: auto; padding-top: 18px;
 }
-.topper { position: relative; z-index: 3; margin-bottom: -22px; line-height: 0; }
-.topper svg { display: block; }
+.topper { position: relative; z-index: 3; width: 120px; height: 74px; margin-bottom: -22px; }
+/* The logo, squashed so the roll sits flat on the cake */
+.topper img { display: block; width: 120px; height: 120px; transform: scaleY(0.617); transform-origin: top; }
 .tier {
   position: relative; z-index: 1; overflow: hidden; margin-top: -3px;
   border: 3px solid var(--ink); border-radius: 16px 16px 8px 8px;
@@ -203,7 +207,6 @@ img { max-width: 100%; display: block; }
   position: relative; z-index: 0; width: 116%; height: 26px; margin-top: -12px;
   background: var(--glaze); border: 3px solid var(--ink); border-radius: 50%;
 }
-.cake-caption { margin: 1.25rem auto 0; text-align: center; font-size: 0.95rem; color: var(--ink-soft); }
 
 /* One orchestrated moment: the cake stacks itself on load */
 @keyframes stack {
@@ -300,6 +303,21 @@ img { max-width: 100%; display: block; }
 }
 .portrait span { position: relative; padding-top: 0.6em; }
 .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Credits: a game-style roll of past projects */
+.credits { list-style: none; margin: 2rem 0 0; padding: 0; max-width: 900px; border-top: 3px solid var(--ink); }
+.credits li {
+  display: grid; grid-template-columns: minmax(0, 17rem) 1fr; gap: 0.35rem 2rem;
+  padding-block: 1.15rem; border-bottom: 2px dashed rgba(59, 33, 22, 0.3);
+}
+.credits h3 { margin: 0; font-size: 1.3rem; }
+.credits cite { font-style: normal; }
+.credit-note {
+  display: block; width: fit-content; margin-top: 0.4rem;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0;
+  padding: 0.1rem 0.5rem; background: var(--butter); border: 2px solid var(--ink); border-radius: 6px;
+}
+.credits p { margin: 0; color: var(--ink-soft); }
 
 .recipe-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .recipe {
@@ -412,7 +430,6 @@ img { max-width: 100%; display: block; }
   display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap;
 }
 .ticket-head h2 { margin: 0; font-size: 1.7rem; }
-.ticket-head p { margin: 0; font-size: 0.95rem; color: var(--ink-soft); }
 
 .field { display: grid; gap: 0.4rem; margin-bottom: 1.3rem; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.25rem; }
@@ -461,6 +478,7 @@ input:focus, select:focus, textarea:focus { background: var(--glaze); }
 }
 @media (max-width: 560px) {
   .field-row { grid-template-columns: 1fr; }
+  .credits li { grid-template-columns: 1fr; }
   body { font-size: 1.0625rem; }
 }
 
@@ -472,7 +490,13 @@ input:focus, select:focus, textarea:focus { background: var(--glaze); }
 @media (max-width: 860px) {
   .sprinkles { display: none; }
 }
-@media (max-width: 420px) {
-  .site-header .brand { font-size: 1.15rem; gap: 0.45rem; }
-  .site-header .brand svg { width: 38px; height: 38px; }
+@media (max-width: 480px) {
+  .site-header .brand { font-size: 1.05rem; gap: 0.45rem; }
+  .site-header .brand .logo { width: 36px; height: 36px; }
+  .nav-toggle { padding: 0.35rem 0.85rem; }
+}
+@media (max-width: 380px) {
+  .header-inner { column-gap: 0.5rem; }
+  .site-header .brand { font-size: 0.98rem; }
+  .nav-toggle { padding: 0.3rem 0.7rem; }
 }

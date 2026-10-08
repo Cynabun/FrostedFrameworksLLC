@@ -37,7 +37,7 @@
       });
       if (!res.ok) throw new Error('Request failed');
       form.reset();
-      status.textContent = 'Request sent. Thanks! You’ll hear back soon.';
+      status.textContent = 'Request sent. Thanks! I’ll get back to you soon.';
       status.classList.add('success');
       button.textContent = 'Sent';
     } catch (err) {
